@@ -1,41 +1,28 @@
 import { Request, Response, Router } from 'express'
+import ProjectController from '../controllers/ProjectController';
 
 const router: Router = Router()
+const projectController: ProjectController = new ProjectController()
 
 router
   .route('/')
-  .get((req: Request, res: Response) => {
-    //get all projects
-    return res.json({
-      message: 'Hello from the api side',
-    })
+  .get(async (req: Request, res: Response) => {
+    await projectController.findAllProjects(req, res)
   })
-  .post((req: Request, res: Response) => {
-    //create a new project
-    return res.json({
-      message: 'Hello from the api side',
-    })
+  .post(async (req: Request, res: Response) => {
+    await projectController.createProject(req, res)
   })
 
 router
   .route('/:project_id')
-  .get((req: Request, res: Response) => {
-    //get project with id = project_id
-    return res.json({
-      message: 'Hello from the api side',
-    })
+  .get(async (req: Request, res: Response) => {
+    await projectController.findProjectById(req, res)
   })
-  .put((req: Request, res: Response) => {
-    //update the project
-    return res.json({
-      message: 'Hello from the api side',
-    })
+  .patch(async (req: Request, res: Response) => {
+    await projectController.updateProject(req, res)
   })
-  .delete((req: Request, res: Response) => {
-    //delete the project
-    return res.json({
-      message: 'Hello from the api side',
-    })
+  .delete(async (req: Request, res: Response) => {
+    await projectController.deleteProject(req, res)
   })
 
 export default router
