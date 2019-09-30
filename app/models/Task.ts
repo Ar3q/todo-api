@@ -4,9 +4,11 @@ import Project from './Project'
 
 export default class Task extends BaseModel {
   readonly id!: number
-  title?: string
+  title!: string
   description?: string
   projectId?: number
+  done!: boolean
+  remindAt?: Date
 
   project?: Project
 
@@ -14,13 +16,14 @@ export default class Task extends BaseModel {
 
   static jsonSchema = {
     type: 'object',
-    required: ['title'],
+    required: ['title', 'done'],
 
     properties: {
       id: { type: 'integer' },
       title: { type: 'string', minLength: 1, maxLength: 255 },
       description: { type: 'string', minLength: 1, maxLength: 255 },
       projectId: { type: 'integer' },
+      done: { type: 'boolean' }
     },
   }
 

@@ -7,6 +7,7 @@ import { Model } from 'objection';
 import Knex = require('knex')
 
 //Objectionjs/knex config
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const knexConfig = require('../knexfile')
 export const knex = Knex(knexConfig.development)
 
