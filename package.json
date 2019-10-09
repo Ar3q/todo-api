@@ -6,9 +6,9 @@
   "scripts": {
     "tsc": "tsc",
     "dev": "ts-node-dev --respawn --transpileOnly ./app/app.ts",
-    "prod": "tsc && node ./build/app.js",
+    "prod": "tsc && node ./build/app/app.js",
     "lint": "node_modules/.bin/eslint ./app --ext .ts",
-    "start": "tsc && node ./build/app.js"
+    "start": "tsc && node ./build/app/app.js"
   },
   "author": "",
   "license": "ISC",
