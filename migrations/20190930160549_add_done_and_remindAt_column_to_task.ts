@@ -1,5 +1,4 @@
 import * as Knex from "knex";
-import { knex } from '../app/app';
 
 
 export async function up(knex: Knex): Promise<any> {

@@ -1,9 +1,15 @@
+require('ts-node/register')
+
 module.exports = {
   development: {
     client: "sqlite3",
     useNullAsDefault: true,
     connection: {
       filename: "./dev.db"
+    },
+    migrations: {
+    tableName: 'knex_migrations',    
+    directory: 'migrations',
     }
   },
 
