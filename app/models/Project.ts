@@ -1,12 +1,14 @@
 import BaseModel from './BaseModel'
 import Task from './Task'
 import { RelationMappings, Model } from 'objection'
+import User from './User'
 
 export default class Project extends BaseModel {
   readonly id!: number
   name?: string
 
   tasks?: Task[]
+  user!: User
 
   static tableName = 'projects'
 
@@ -27,6 +29,14 @@ export default class Project extends BaseModel {
       join: {
         from: 'projects.id',
         to: 'tasks.projectId',
+      },
+    },
+    user: {
+      relation: Model.BelongsToOneRelation,
+      modelClass: User,
+      join: {
+        from: 'projects.id',
+        to: 'users.id',
       },
     },
   }

@@ -23,7 +23,7 @@ export default class Task extends BaseModel {
       title: { type: 'string', minLength: 1, maxLength: 255 },
       description: { type: 'string', minLength: 1, maxLength: 255 },
       projectId: { type: 'integer' },
-      done: { type: 'boolean' }
+      done: { type: 'boolean' },
     },
   }
 
