@@ -1,16 +1,10 @@
-import { Request, Response } from 'express'
+import { Service } from 'typedi'
 import Task from '../models/Task';
 
-class TaskService {
-  public async createTask(task: Task): Promise<Task> {
-    // const taskToCreate = {
-    //   title: req.body.title,
-    //   description: req.body.description,
-    //   projectId: parseInt(req.params.project_id),
-    //   done: req.body.done || false,
-    //   remindAt: new Date(req.body.remindAt) || null,
-    // }
-
+@Service()
+class TaskRepository {
+  public async createTask(task: Task, projectId: number): Promise<Task> {
+    task.projectId = projectId
     const createdTask = await Task.query().insert(task)
     return createdTask
   }
@@ -41,4 +35,4 @@ class TaskService {
   }
 }
 
-export default TaskService
+export default TaskRepository

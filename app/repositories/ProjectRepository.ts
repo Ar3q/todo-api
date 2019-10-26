@@ -1,6 +1,8 @@
+import { Service } from 'typedi'
 import Project from '../models/Project'
 
-class ProjectService {
+@Service()
+class ProjectRepository {
   public async createProject(project: Project): Promise<Project> {
     return await Project.query().insert(project)
   }
@@ -36,4 +38,4 @@ class ProjectService {
   }
 }
 
-export default ProjectService
+export default ProjectRepository

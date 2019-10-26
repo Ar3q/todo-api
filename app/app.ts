@@ -1,9 +1,14 @@
 require('dotenv').config()
+import 'reflect-metadata'
+import { createExpressServer, useContainer } from 'routing-controllers'
 import express = require('express')
 import morgan = require('morgan')
 
-import routes from './routes/index'
+import { Container } from 'typedi'
+
 import { Model } from 'objection'
+import { ProjectController } from './controllers/ProjectController'
+import { TaskController } from './controllers/TaskController'
 import Knex = require('knex')
 
 console.log(`process.env.NODE_ENV: ${process.env.NODE_ENV}`)
@@ -19,18 +24,22 @@ export const knex =
 knex.migrate.latest()
 Model.knex(knex)
 
+useContainer(Container)
+
 const port = process.env.PORT || 3000
 
-const app: express.Application = express()
+const app: express.Application = createExpressServer({
+  routePrefix: '/api',
+  // controllers: [__dirname + '/controllers/*.js'],
+  //change to exact specifing controllers due to problems with paths not working with npm run dev
+  controllers: [ProjectController, TaskController],
+})
 
-app.use(express.json())
 app.use(morgan('dev'))
 
 app.get('/', (req, res) => {
   res.send('Hello Cruel World!')
 })
-
-app.use('/api', routes)
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}!`)

@@ -4,34 +4,39 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "tsc": "tsc",
+    "build": "tsc",
+    "prod": "export NODE_ENV=production && npm run build && node ./build/app/app.js",
     "dev": "export NODE_ENV=development && npm run knex:migrate && nodemon",
     "knex:migrate": "knex migrate:latest",
-    "prod": "export NODE_ENV=production tsc && node ./build/app/app.js",
     "lint": "node_modules/.bin/eslint ./app --ext .ts",
-    "start": "tsc && node ./build/app/app.js"
+    "start": "npm run prod"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/express": "^4.17.1",
+    "class-transformer": "^0.2.3",
+    "class-validator": "^0.10.2",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
     "knex": "^0.19.4",
     "morgan": "^1.9.1",
     "objection": "^1.6.11",
+    "reflect-metadata": "^0.1.13",
+    "routing-controllers": "^0.8.0",
     "sqlite3": "^4.1.0",
-    "ts-node": "^8.4.1"
+    "ts-node": "^8.4.1",
+    "typedi": "^0.8.0"
   },
   "devDependencies": {
     "@types/body-parser": "^1.17.1",
+    "@types/express": "^4.17.1",
     "@types/morgan": "^1.7.37",
+    "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "^2.3.1",
     "@typescript-eslint/parser": "^2.3.1",
     "eslint": "^6.4.0",
     "nodemon": "^1.19.4",
     "prettier": "1.18.2",
-    "ts-node-dev": "^1.0.0-pre.43",
     "typescript": "^3.6.4"
   }
 }
